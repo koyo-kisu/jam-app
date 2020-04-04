@@ -23,11 +23,14 @@ export default {
   ** Global CSS
   */
   css: [
+    '@fortawesome/fontawesome-svg-core/styles.css',
   ],
   /*
   ** Plugins to load before mounting the App
+    plugins配下のfont-awsomeを読み込む
   */
   plugins: [
+    { src: '~plugins/font-awesome', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,7 +43,21 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/markdownit',
+    'nuxt-fontawesome'
   ],
+
+  markdownit: { 
+    html: true,
+    injected: true,
+    linkify: true,
+    breaks: false
+  },
+
+  // コンポーネントを'fa'として呼び出す
+  fontawesome: {
+    component: 'fa'
+  },
   /*
   ** Build configuration
   */
