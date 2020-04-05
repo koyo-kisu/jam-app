@@ -19,6 +19,7 @@
         v-for="tag in work.fields.tag"
         :key="tag.sys.id"
         class="list-none text-xs m-1 bg-gray-200 p-1 rounded cursor-pointer"
+        @click="$router.push('/tag/'+tag.sys.id)"
       >
         {{ tag.fields.name }}
       </li>
