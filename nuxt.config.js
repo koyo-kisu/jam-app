@@ -3,6 +3,13 @@ const contentful = require('contentful')
 
 export default {
   mode: 'universal',
+  
+  // 環境変数を設定したファイル(定数config)から引っ張ってきてる
+  env: {
+   CTF_SPACE_ID: config.CTF_SPACE_ID,
+   CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN
+   },
+
   /*
   ** Headers of the page
   */
@@ -59,12 +66,6 @@ export default {
   // コンポーネントを'fa'として呼び出す
   fontawesome: {
     component: 'fa'
-  },
-
-  // 環境変数を設定したファイル(定数config)から引っ張ってきてる
-  env: {
-    CTF_SPACE_ID: config.CTF_SPACE_ID,
-    CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN
   },
   /*
   ** Build configuration
