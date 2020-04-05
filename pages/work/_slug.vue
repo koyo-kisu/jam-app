@@ -4,6 +4,9 @@
       class="w-full h-64 my-6 bg-cover bg-center shadow-lg"
       :style=" 'background-image: url(' + work.fields.image.fields.file.url + ')' "
     ></div>
+    <nuxt-link :to=" '/category/' + work.fields.category.sys.id ">
+      <p class="text-center">{{ work.fields.category.fields.name }}</p>
+    </nuxt-link>
     <h1 class="text-center text-4xl">{{ work.fields.title }}</h1>
     <p class="text-center text-sm">{{ work.fields.subtitle }}</p>
     <div class="flex justify-center mb-5">
