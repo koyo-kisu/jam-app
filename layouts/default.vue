@@ -35,7 +35,15 @@
           </button>
         </a>
        </div>
-     </div>
+      <!-- 入力ワードを元に全文検索 -->
+      <input 
+        type="text"
+        placeholder="検索ワードを入力してください" 
+        class="bg-gray-300 p-2 text-xs rounded w-full mt-5 focus:outline-none" 
+        v-model="keyword" 
+        @keypress.enter="$router.push('/search/' + keyword)"
+      > 
+    </div>
    </header>
    <main class="w-full mt-10">
      <nuxt />
@@ -57,6 +65,11 @@ export default {
     },
     faCode () {
       return faCode
+    }
+  },
+  data() {
+    return {
+      keyword: '',
     }
   }
 }
