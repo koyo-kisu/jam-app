@@ -1,6 +1,11 @@
 const config = require('./.contentful.json')
 const contentful = require('contentful')
 
+const client = contentful.createClient({
+  space: config.CTF_SPACE_ID,
+  accessToken: config.CTF_CDA_ACCESS_TOKEN
+})
+
 export default {
   mode: 'universal',
   
@@ -66,6 +71,32 @@ export default {
   // コンポーネントを'fa'として呼び出す
   fontawesome: {
     component: 'fa'
+  },
+
+  // Nuxt.jsは、動的なルーティングを無視してレタリングを行う
+  // そのため動的なルーティングの静的ファイルを出力する設定
+  // Promiseを返す関数を使う
+  generate: {
+    routes () {
+      return Promise.all([
+        client.getEntries({
+          'content_type': 'work'
+        }),
+        client.getEntries({
+          'content_type': 'category'
+        }),
+        client.getEntries({
+          'content_type': 'tag'
+        })
+      ]).then(([works,categories,tags]) => {
+        return [
+          // 各オブジェクトにルーティングを登録
+          ...works.items.map(work => `work/${work.fields.slug}`),
+          ...categories.items.map(category => `category/${category.fields.slug}`),
+          ...tags.items.map(tag => `tag/${tag.sys.id}`)
+        ]
+      })
+    }
   },
   /*
   ** Build configuration
